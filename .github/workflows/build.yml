@@ -152,7 +152,7 @@ jobs:
         cd build/test
         xvfb-run ./WPanda-test
 
-    - name: Make AppImage
+    - name: linuxdeployqt
       if: startsWith(github.ref, 'refs/tags/')
       run: |
         mkdir appimage
@@ -400,7 +400,7 @@ jobs:
         cd build
         jom check
 
-    - name: Make WiRedPanda package
+    - name: windeployqt
       if: startsWith(github.ref, 'refs/tags/')
       run : |
         cp -r examples build/app/release
@@ -631,18 +631,18 @@ jobs:
         cd build
         make check
 
-    - name: Rename file
+    - name: macdeployqt
       if: startsWith(github.ref, 'refs/tags/')
       run: |
         cd build/app
-        zip -r WiRedPanda-macOS-Qt5.zip wiredpanda.app
+        macdeployqt wiredpanda.app -dmg
 
     - name: Release
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
         fail_on_unmatched_files: true
-        files: 'build/app/*.zip'
+        files: 'build/app/*.dmg'
 
 # =================================
 
