@@ -158,7 +158,8 @@ jobs:
         mkdir appimage
         cp app/resources/wpanda.desktop appimage/wpanda.desktop
         cp app/resources/wpanda.svg appimage/wpanda_icon.svg
-        cp build/app/wiredpanda appimage/
+        cp build/app/wiredpanda appimage
+        cp -r examples appimage
         wget https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage
         chmod +x ./linuxdeployqt-continuous-x86_64.AppImage
         VERSION=4 ./linuxdeployqt-continuous-x86_64.AppImage appimage/wiredpanda -appimage
@@ -635,6 +636,7 @@ jobs:
       if: startsWith(github.ref, 'refs/tags/')
       run: |
         cd build/app
+        cp -r examples build/app
         macdeployqt wiredpanda.app -dmg
         mv wiredpanda.dmg WiRedPanda-macOS-Qt5.dmg
 
