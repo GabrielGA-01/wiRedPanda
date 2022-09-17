@@ -111,9 +111,13 @@ MainWindow::MainWindow(const QString &fileName, QWidget *parent)
 
     qCDebug(zero) << tr("Adding examples to menu");
     QDir examplesDir("examples");
+    QDir examplesDir2("$APPDIR/examples");
 
-    if (examplesDir.exists()) {
-        for (const auto &entry : examplesDir.entryList({"*.panda"}, QDir::Files)) {
+    if (examplesDir.exists() || examplesDir2.exists()) {
+        auto files = examplesDir.entryList({"*.panda"}, QDir::Files);
+        files.append(examplesDir2.entryList({"*.panda"}, QDir::Files));
+
+        for (const auto &entry : files) {
             auto *action = new QAction(entry);
 
             connect(action, &QAction::triggered, this, [this] {
