@@ -635,8 +635,8 @@ jobs:
     - name: macdeployqt
       if: startsWith(github.ref, 'refs/tags/')
       run: |
-        cd build/app
         cp -r examples build/app
+        cd build/app
         macdeployqt wiredpanda.app -dmg
         mv wiredpanda.dmg WiRedPanda-macOS-Qt5.dmg
 
