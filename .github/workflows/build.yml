@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-18.04, windows-latest, macos-latest]
         qt_version: [5.12.12, 5.13.2, 5.14.2, 5.15.2, 6.2.4, 6.3.2, 6.4.0]
     runs-on: ${{ matrix.os }}
     
@@ -19,6 +19,14 @@ jobs:
       with:
         submodules: recursive
         fetch-depth: 0
+        
+    - name: Set up Git for properly handling symlinks
+      if: startsWith(matrix.os, 'windows')
+      run: git config --global core.symlinks true
+        
+    - name: Setup MSVC Toolchain
+      if: startsWith(matrix.os, 'windows')
+      uses: seanmiddleditch/gha-setup-vsdevenv@v4
 
     - name: Install Qt5
       if: startsWith(matrix.qt_version, '5')
@@ -38,6 +46,7 @@ jobs:
         aqtversion: ==2.2.3
 
     - name: ccache
+      if: !startsWith(matrix.os, 'windows')
       uses: hendrikmuhs/ccache-action@v1.2
     
     - name: Build Ubuntu
