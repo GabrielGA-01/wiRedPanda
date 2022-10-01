@@ -43,7 +43,7 @@ jobs:
     - name: Build Ubuntu
       if: startsWith(matrix.os, 'ubuntu')
       run: |
-        install libgstreamer-gl1.0-0
+        sudo apt install libgstreamer-gl1.0-0
         mkdir build
         cd build
         qmake ../WPanda.pro
@@ -68,12 +68,18 @@ jobs:
 
     - name: Test Ubuntu
       if: startsWith(matrix.os, 'ubuntu')
-      run: xvfb-run ./WPanda-test
+      run: |
+        cd build
+        xvfb-run ./WPanda-test
     
     - name: Test Windows
       if: startsWith(matrix.os, 'windows')
-      run: jom check
+      run: |
+        cd build
+        jom check
     
     - name: Test macOS
       if: startsWith(matrix.os, 'mac')
-      run: make check
+      run: |
+        cd build
+        make check
