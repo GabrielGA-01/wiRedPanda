@@ -12,9 +12,10 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
         qt_version: [5.12.12, 5.13.2, 5.14.2, 5.15.2, 6.2.4, 6.3.2, 6.4.0]
-    runs-on: ${{ matrix.os }}
     
 # =================================
+
+    runs-on: ${{ matrix.os }}
 
     steps:
     - uses: actions/checkout@v3
@@ -89,62 +90,3 @@ jobs:
       run: |
         cd build
         make check
-        
-# =================================
-
-    - name: linuxdeployqt
-      if: startsWith(github.ref, 'refs/tags/') && startsWith(matrix.os, 'ubuntu')
-      run: |
-        mkdir appimage
-        cp app/resources/wpanda.desktop appimage/wpanda.desktop
-        cp app/resources/wpanda.svg appimage/wpanda_icon.svg
-        cp build/app/wiredpanda appimage
-        wget https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage
-        chmod +x ./linuxdeployqt-continuous-x86_64.AppImage
-        VERSION=4 ./linuxdeployqt-continuous-x86_64.AppImage appimage/wiredpanda -appimage
-        rm ./linuxdeployqt-continuous-x86_64.AppImage
-        mv WiRedPanda-4-x86_64.AppImage WiRedPanda-Ubuntu-Qt5.AppImage
-
-    - name: Release Ubuntu
-      uses: softprops/action-gh-release@v1
-      if: startsWith(github.ref, 'refs/tags/') && startsWith(matrix.os, 'ubuntu')
-      with:
-        fail_on_unmatched_files: true
-        files: '*.AppImage'
-        
-  # =================================      
-        
-    - name: windeployqt
-      if: startsWith(github.ref, 'refs/tags/') && startsWith(matrix.os, 'windows')
-      run : |
-        cp -r examples build/app/release
-        cd build/app/release
-        windeployqt --compiler-runtime wiredpanda.exe
-        rm wiredpanda_pch.obj
-        rm wiredpanda_pch.pch
-        cd ..
-        ren release wpanda
-        Compress-Archive -Path wpanda -DestinationPath WiRedPanda-Windows-Qt5-Portable.zip
-
-    - name: Release Windows
-      uses: softprops/action-gh-release@v1
-      if: startsWith(github.ref, 'refs/tags/') && startsWith(matrix.os, 'windows')
-      with:
-        fail_on_unmatched_files: true
-        files: 'build/app/*.zip'
-        
-# =================================
-        
-    - name: macdeployqt
-      if: startsWith(github.ref, 'refs/tags/') && startsWith(matrix.os, 'mac')
-      run: |
-        cd build/app
-        macdeployqt wiredpanda.app -dmg
-        mv wiredpanda.dmg WiRedPanda-macOS-Qt5.dmg
-
-    - name: Release macOS
-      uses: softprops/action-gh-release@v1
-      if: startsWith(github.ref, 'refs/tags/') && startsWith(matrix.os, 'mac')
-      with:
-        fail_on_unmatched_files: true
-        files: 'build/app/*.dmg'
