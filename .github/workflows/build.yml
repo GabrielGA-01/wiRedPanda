@@ -69,7 +69,7 @@ jobs:
     - name: Test Ubuntu
       if: startsWith(matrix.os, 'ubuntu')
       run: |
-        cd build
+        cd build/test
         xvfb-run ./WPanda-test
     
     - name: Test Windows
