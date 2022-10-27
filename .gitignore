@@ -49,3 +49,4 @@ _site
 
 Deploy/*
 *.info
+*.user

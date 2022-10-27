@@ -1,0 +1,114 @@
+find_package(Qt5 5.12 CONFIG REQUIRED
+    Charts
+    Core
+    Gui
+    Multimedia
+    PrintSupport
+    Widgets
+)
+
+add_executable(wiredpanda
+    application.cpp
+    bewaveddolphin.cpp
+    clockdialog.cpp
+    commands.cpp
+    common.cpp
+    elementeditor.cpp
+    elementfactory.cpp
+    elementmapping.cpp
+    enums.cpp
+    graphicelement.cpp
+    graphicelementinput.h
+    graphicsview.cpp
+    ic.cpp
+    itemwithid.cpp
+    lengthdialog.cpp
+    logicelement.cpp
+    main.cpp
+    mainwindow.cpp
+    recentfiles.cpp
+    scene.cpp
+    serialization.cpp
+    settings.cpp
+    simulation.cpp
+    simulationblocker.cpp
+    thememanager.cpp
+    workspace.cpp
+    trashbutton.cpp
+    elementlabel.cpp
+
+    arduino/codegenerator.cpp
+
+    nodes/qneconnection.cpp
+    nodes/qneport.cpp
+
+    logicelement/logicand.cpp
+    logicelement/logicdemux.cpp
+    logicelement/logicdflipflop.cpp
+    logicelement/logicdlatch.cpp
+    logicelement/logicinput.cpp
+    logicelement/logicjkflipflop.cpp
+    logicelement/logicmux.cpp
+    logicelement/logicnand.cpp
+    logicelement/logicnode.cpp
+    logicelement/logicnor.cpp
+    logicelement/logicnot.cpp
+    logicelement/logicor.cpp
+    logicelement/logicoutput.cpp
+    logicelement/logicsrflipflop.cpp
+    logicelement/logictflipflop.cpp
+    logicelement/logicxnor.cpp
+    logicelement/logicxor.cpp
+
+    element/and.cpp
+    element/buzzer.cpp
+    element/clock.cpp
+    element/demux.cpp
+    element/dflipflop.cpp
+    element/display_7.cpp
+    element/display_14.cpp
+    element/dlatch.cpp
+    element/inputbutton.cpp
+    element/inputgnd.cpp
+    element/inputrotary.cpp
+    element/inputswitch.cpp
+    element/inputvcc.cpp
+    element/jkflipflop.cpp
+    element/led.cpp
+    element/line.cpp
+    element/mux.cpp
+    element/nand.cpp
+    element/node.cpp
+    element/nor.cpp
+    element/not.cpp
+    element/or.cpp
+    element/srflipflop.cpp
+    element/text.cpp
+    element/tflipflop.cpp
+    element/xnor.cpp
+    element/xor.cpp
+
+    bewaveddolphin.ui
+    clockdialog.ui
+    elementeditor.ui
+    lengthdialog.ui
+    mainwindow.ui
+
+    resources/basic/basic.qrc
+    resources/dolphin/dolphin.qrc
+    resources/input/input.qrc
+    resources/memory/dark/memory_dark.qrc
+    resources/memory/light/memory_light.qrc
+    resources/misc/misc.qrc
+    resources/output/output.qrc
+    resources/toolbar/toolbar.qrc
+)
+
+target_link_libraries(wiredpanda
+    Qt5::Charts
+    Qt5::Core
+    Qt5::Gui
+    Qt5::Multimedia
+    Qt5::PrintSupport
+    Qt5::Widgets
+)
