@@ -49,4 +49,4 @@ _site
 
 Deploy/*
 *.info
-*.user
+CMakeLists.txt.*
