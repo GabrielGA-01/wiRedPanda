@@ -62,7 +62,7 @@ jobs:
       if: runner.os == 'Linux'
       run: |
         cd build/test
-        xvfb-run ./WPanda-test
+        xvfb-run ./wiredpanda-test
 
 # =================================
 
@@ -79,7 +79,7 @@ jobs:
       if: runner.os == 'Windows'
       run: |
         cd build
-        ./WPanda-test
+        ./wiredpanda-test
 
 # =================================
 
@@ -92,4 +92,4 @@ jobs:
       if: runner.os == 'macOS'
       run: |
         cd build
-        ./WPanda-test
+        ./wiredpanda-test
