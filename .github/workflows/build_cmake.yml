@@ -39,10 +39,15 @@ jobs:
         cache: true
         aqtversion: ==2.2.3
         
-    - name: Install Ubuntu libs
+    - name: Install Ubuntu dependencies
       if: runner.os == 'Linux'
       run: |
         sudo apt install libgstreamer-gl1.0-0 ninja-build
+        
+    - name: Install macOS dependencies
+      if: runner.os == 'macOS'
+      run: |
+        brew install ninja
         
     - name: Setup MSVC Toolchain
       if: runner.os == 'Windows'
