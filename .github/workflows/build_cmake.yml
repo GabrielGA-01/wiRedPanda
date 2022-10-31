@@ -47,7 +47,7 @@ jobs:
         key: ${{ matrix.os }}
 
     - name: Configure CMake
-      run: cmake -DCMAKE_BUILD_TYPE=Release -B build
+      run: cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER_LAUNCHER=ccache -B build
 
 # =================================
 
@@ -76,7 +76,7 @@ jobs:
     - name: Test Windows
       if: runner.os == 'Windows'
       run: |
-        build/test/release/wiredpanda-test
+        build/test/wiredpanda-test.exe
 
 # =================================
 
