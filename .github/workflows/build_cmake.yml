@@ -1,0 +1,95 @@
+# Copyright 2015 - 2022, GIBIS-Unifesp and the WiRedPanda contributors
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+name: Build
+
+on: [push]
+
+jobs:
+  build:
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        qt_version: [5.12.12, 5.13.2, 5.14.2, 5.15.2, 6.2.4, 6.3.2, 6.4.0]
+
+# =================================
+
+    runs-on: ${{ matrix.os }}
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name
+
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+        fetch-depth: 0
+
+    - name: Install Qt5
+      if: startsWith(matrix.qt_version, '5')
+      uses: jurplel/install-qt-action@v3
+      with:
+        version: ${{ matrix.qt_version }}
+        cache: true
+        aqtversion: ==2.2.3
+
+    - name: Install Qt6
+      if: startsWith(matrix.qt_version, '6')
+      uses: jurplel/install-qt-action@v3
+      with:
+        version: ${{ matrix.qt_version }}
+        modules: qtmultimedia
+        cache: true
+        aqtversion: ==2.2.3
+
+    - name: ccache
+      uses: hendrikmuhs/ccache-action@v1.2
+      with:
+        key: ${{ matrix.os }}
+
+    - name: Configure CMake
+      run: cmake -DCMAKE_BUILD_TYPE=Release -B build
+
+# =================================
+
+    - name: Build Ubuntu
+      if: runner.os == 'Linux'
+      run: |
+        sudo apt install libgstreamer-gl1.0-0
+        cmake --build build
+
+    - name: Test Ubuntu
+      if: runner.os == 'Linux'
+      run: |
+        cd build/test
+        xvfb-run ./WPanda-test
+
+# =================================
+
+    - name: Setup MSVC Toolchain
+      if: runner.os == 'Windows'
+      uses: seanmiddleditch/gha-setup-vsdevenv@v4
+
+    - name: Build Windows
+      if: runner.os == 'Windows'
+      run: |
+        cmake --build build
+
+    - name: Test Windows
+      if: runner.os == 'Windows'
+      run: |
+        cd build
+        ./WPanda-test
+
+# =================================
+
+    - name: Build macOS
+      if: runner.os == 'macOS'
+      run: |
+        cmake --build build
+
+    - name: Test macOS
+      if: runner.os == 'macOS'
+      run: |
+        cd build
+        ./WPanda-test
