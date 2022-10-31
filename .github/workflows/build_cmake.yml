@@ -42,7 +42,7 @@ jobs:
     - name: Install Ubuntu libs
       if: runner.os == 'Linux'
       run: |
-        sudo apt install libgstreamer-gl1.0-0
+        sudo apt install libgstreamer-gl1.0-0 ninja-build
         
     - name: Setup MSVC Toolchain
       if: runner.os == 'Windows'
