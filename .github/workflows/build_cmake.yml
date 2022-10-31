@@ -70,10 +70,10 @@ jobs:
       run: |
         xvfb-run build/test/wiredpanda-test
 
+      #not working
     - name: Test Windows
       if: runner.os == 'Windows'
       run: |
-        windeployqt build/test/wiredpanda-test.exe
         build/test/wiredpanda-test.exe
 
     - name: Test macOS
