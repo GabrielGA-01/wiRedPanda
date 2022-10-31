@@ -6,7 +6,7 @@ name: Build
 on: [push]
 
 jobs:
-  build:
+  cmake:
     strategy:
       fail-fast: true
       matrix:
@@ -76,7 +76,7 @@ jobs:
     - name: Test Windows
       if: runner.os == 'Windows'
       run: |
-        build/test/wiredpanda-test.exe
+        build/test/Debug/wiredpanda-test.exe
 
 # =================================
 
