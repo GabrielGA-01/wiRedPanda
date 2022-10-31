@@ -1,5 +1,12 @@
-find_package(Qt5 5.12 CONFIG REQUIRED
-    Charts
+find_package(QT NAMES Qt6 6.2 Qt5 5.12 CONFIG REQUIRED
+    Core
+    Gui
+    Multimedia
+    PrintSupport
+    Widgets
+)
+
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED
     Core
     Gui
     Multimedia
@@ -105,10 +112,9 @@ add_executable(wiredpanda
 )
 
 target_link_libraries(wiredpanda
-    Qt5::Charts
-    Qt5::Core
-    Qt5::Gui
-    Qt5::Multimedia
-    Qt5::PrintSupport
-    Qt5::Widgets
+    Qt${QT_VERSION_MAJOR}::Core
+    Qt${QT_VERSION_MAJOR}::Gui
+    Qt${QT_VERSION_MAJOR}::Multimedia
+    Qt${QT_VERSION_MAJOR}::PrintSupport
+    Qt${QT_VERSION_MAJOR}::Widgets
 )
