@@ -1,4 +1,4 @@
-find_package(QT NAMES Qt6 6.2 Qt5 5.12 CONFIG REQUIRED
+find_package(QT NAMES Qt6 6.2 Qt5 5.12 REQUIRED
     Core
     Gui
     Multimedia
