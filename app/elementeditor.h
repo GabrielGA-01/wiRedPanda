@@ -51,6 +51,8 @@ private:
     void priorityChanged(const int value);
     void updateSkins();
     void TruthTable();
+    void ChangeKeyTruthTable(int row, int column);
+
 
     Ui::ElementEditor *m_ui;
     QList<GraphicElement *> m_elements;
