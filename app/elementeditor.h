@@ -51,6 +51,7 @@ private:
     void priorityChanged(const int value);
     void updateSkins();
     void TruthTable();
+    void SetTruthTableProposition(int row, int column);
     void ChangeKeyTruthTable(int row, int column);
 
 
