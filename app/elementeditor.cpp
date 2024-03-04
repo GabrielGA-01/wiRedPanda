@@ -884,7 +884,7 @@ void ElementEditor::TruthTable()
         for(int j =0; j < nInputs; j++)
         {
             m_ui->truthTable->setColumnWidth(j,14);
-            auto newItemValue = QString(QString::number(i, 2));
+            auto newItemValue = QString::number(i, 2);
 
             if(newItemValue.size() < nInputs){
                 newItemValue = newItemValue.rightJustified(nInputs, '0');
@@ -892,13 +892,13 @@ void ElementEditor::TruthTable()
 
             if(m_ui->truthTable->item(i, j) == nullptr)
             {
-                QTableWidgetItem *newItem = new QTableWidgetItem(QString(newItemValue).at(j), QTableWidgetItem::Type);
+                auto *newItem = new QTableWidgetItem(newItemValue.at(j), QTableWidgetItem::Type);
                 newItem->setTextAlignment(Qt::AlignCenter);
                 m_ui->truthTable->setItem(i, j, newItem);
                 m_ui->truthTable->item(i,j)->setFlags(Qt::ItemIsEnabled);
             }
 
-                m_ui->truthTable->item(i,j)->setText(QString(newItemValue).at(j));
+                m_ui->truthTable->item(i,j)->setText(newItemValue.at(j));
         }
 
         auto arr = m_elements[0]->key();
@@ -909,7 +909,7 @@ void ElementEditor::TruthTable()
 
             if(m_ui->truthTable->item(i, nInputs + z) == nullptr)
             {
-                QTableWidgetItem *newOutItem = new QTableWidgetItem(QString(QChar::fromLatin1('0' + output)));
+                auto *newOutItem = new QTableWidgetItem(QString(QChar::fromLatin1('0' + output)));
                 newOutItem->setTextAlignment(Qt::AlignCenter);
                 m_ui->truthTable->setItem(i, nInputs + z, newOutItem);
                 m_ui->truthTable->item(i,nInputs + z)->setFlags(Qt::ItemIsEnabled);
