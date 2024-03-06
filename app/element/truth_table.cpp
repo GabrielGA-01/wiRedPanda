@@ -65,4 +65,9 @@ void TruthTable::generatePixmap()
     m_pixmap = std::make_unique<QPixmap>(tempPixmap);
 }
 
+void TruthTable::updatePortsProperties()
+{
+
+}
+
 
