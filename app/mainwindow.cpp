@@ -1297,7 +1297,9 @@ bool MainWindow::event(QEvent *event)
     }
 
     case QEvent::WindowDeactivate: {
-        on_actionPlay_toggled(false);
+        if(!m_ui->actionBackground_Simulation->isChecked()){
+            on_actionPlay_toggled(false);
+        }
         break;
     }
 

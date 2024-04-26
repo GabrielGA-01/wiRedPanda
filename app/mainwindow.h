@@ -121,6 +121,7 @@ private:
     void openRecentFile();
     void populateLeftMenu();
     void removeICFile(const QString &icFileName);
+    void backgroundSimulation();
     void tabChanged(const int newTabIndex);
     void updateICList();
     void updateRecentFileActions();
@@ -149,6 +150,7 @@ private:
 
     QFileInfo m_currentFile;
     WorkSpace *m_currentTab = nullptr;
+
     int m_tabIndex = -1;
 
     int m_lastTabIndex = -1;
