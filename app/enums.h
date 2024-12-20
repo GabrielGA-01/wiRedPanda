@@ -40,6 +40,7 @@ public:
         Not = 4,
         Or = 6,
         SRFlipFlop = 19,
+        SRLatch = 30,
         TFlipFlop = 20,
         Text = 28,
         TruthTable = 30,
